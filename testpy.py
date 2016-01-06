@@ -100,16 +100,46 @@ def primes():
 		n=next(it)
 		yield n
 		it = filter(_not_divisible,it)
+#文件读写 'r'read 'rb'read in binary 'w'write 'wb'write in binary
+# with open('test.lua','r',encoding = 'gbk',errors = 'ignore') as f:
+# 	print(f.read(100))
+# 	# for lines in f.readlines():
+# 	# 	print(lines.strip())
 
-def by_name(t):
-	return t[0].lower()
-def by_score(t):
-	return t[1]
-L = [('Bob', 75), ('Adam', 92), ('Bart', 66), ('Lisa', 88)]
-L2 = sorted(L, key=by_name)
-print(L2)
-L2 = sorted(L, key=by_score,reverse=True)
-print(L2)
+# with open('test.txt','w',encoding = 'utf-8')as f:
+# 	f.write('Hello Woarld')
 
 
+# def by_name(t):
+# 	return t[0].lower()
+# def by_score(t):
+# 	return t[1]
+# L = [('Bob', 75), ('Adam', 92), ('Bart', 66), ('Lisa', 88)]
+# L2 = sorted(L, key=by_name)
+# print(L2)
+# L2 = sorted(L, key=by_score,reverse=True)
+# print(L2)
+
+# [x for x in os.listdir('.') if os.path.isdir(x)]
+# [x for x in os.listdir('.') if os.path.isfile(x) and os.path.splitext(x)[1]=='.py']
+
+#json
+import json
+
+class Student(object):
+	def __init__(self, name, age, score):
+		self.name = name
+		self.age = age
+		self.score = score
+	
+def student2dict(std):
+		return {
+	    	'name': std.name,
+	    	'age': std.age,
+	    	'score': std.score
+	    	}
+s = Student('Bob', 20, 88)
+print(json.dumps(s, default=student2dict))
+
+print(json.dumps(s, default=lambda s: s.__dict__))
 

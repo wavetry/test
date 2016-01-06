@@ -144,12 +144,148 @@
 # from testpy import str2float
 # from testpy import primes
 
-def log(func):
-	def wrapper(*args,**kw):
-		print('call %s:'%func.__name__)
-		return func(*args,**kw)
-	return wrapper(*args,**kw)
-@log
-def now():
-	print("now")
-now()
+# import sys
+# sys.path.append('')
+
+# class Student(object):
+# 	"""docstring for Student"""
+# 	__slots__ = ('name','__age','set_age')
+# 	def __init__(self, name,age):
+# 		super(Student, self).__init__()
+# 		self.name = name
+# 		self.__age = age
+
+# 	def print_info(self):
+# 		print(self.name,self._age)
+
+# s = Student('Adult',12)
+# def set_age(self,age):
+# 	self.age = age
+# from types import MethodType
+# s.set_age = MethodType(set_age,s)
+# s.set_age(15)
+# s.age = 116
+# s.n = 12
+# print(s.age)
+
+
+#文件读写 'r'read 'rb'read in binary 'w'write 'wb'write in binary
+# with open('test.lua','r',encoding = 'gbk',errors = 'ignore') as f:
+# 	print(f.read(100))
+# 	# for lines in f.readlines():
+# 	# 	print(lines.strip())
+
+# with open('test.txt','w',encoding = 'utf-8')as f:
+# 	f.write('Hello Woarld')
+
+# #StringIO BytesIO
+# from io import StringIO
+# f = StringIO('linzhilang\n')
+# f.write('linzhilang')
+# print(f.getvalue())
+
+#序列化
+# import pickle
+# l = [1,2,3]
+# p =  pickle.dumps(l)
+# f = open('dump.txt','wb')
+# pickle.dump(l,f)
+# f.close()
+# print(p)
+# f=open('dump.txt','rb')
+# l = pickle.load(f)
+# f.close()
+# print(l)
+
+		
+#json
+# import json
+# d=dict(name='lzl',age=2)
+# r=json.dumps(d)
+# lr=json.loads(r)
+# print(type(r))
+# print(type(lr))
+
+# import json
+
+# class Student(object):
+# 	def __init__(self, name, age, score):
+# 		self.name = name
+# 		self.age = age
+# 		self.score = score
+	
+# def student2dict(std):
+# 		return {
+# 	    	'name': std.name,
+# 	    	'age': std.age,
+# 	    	'score': std.score
+# 	    	}
+# s = Student('Bob', 20, 88)
+# print(json.dumps(s, default=student2dict))
+
+# print(json.dumps(s, default=lambda s: s.__dict__))
+
+
+# from datetime import datetime
+# now = datetime.now()
+# print(now)
+# dt = datetime(1024,2,3,2,2)
+# print(dt)
+
+# from urllib import request
+
+# with request.urlopen('https://api.douban.com/v2/book/2129650') as f:
+#     data = f.read()
+#     print('Status:', f.status, f.reason)
+#     for k, v in f.getheaders():
+#         print('%s: %s' % (k, v))
+#     print('Data:', data.decode('utf-8'))
+
+# from urllib import request
+
+# req = request.Request('http://www.douban.com/')
+# req.add_header('User-Agent', 'Mozilla/6.0 (iPhone; CPU iPhone OS 8_0 like Mac OS X) AppleWebKit/536.26 (KHTML, like Gecko) Version/8.0 Mobile/10A5376e Safari/8536.25')
+# with request.urlopen(req) as f:
+#     print('Status:', f.status, f.reason)
+#     for k, v in f.getheaders():
+#         print('%s: %s' % (k, v))
+#     print('Data:', f.read().decode('utf-8'))
+
+
+# from urllib import request, parse
+
+# print('Login to weibo.cn...')
+# email = input('Email: ')
+# passwd = input('Password: ')
+# login_data = parse.urlencode([
+#     ('username', email),
+#     ('password', passwd),
+#     ('entry', 'mweibo'),
+#     ('client_id', ''),
+#     ('savestate', '1'),
+#     ('ec', ''),
+#     ('pagerefer', 'https://passport.weibo.cn/signin/welcome?entry=mweibo&r=http%3A%2F%2Fm.weibo.cn%2F')
+# ])
+
+# req = request.Request('https://passport.weibo.cn/sso/login')
+# req.add_header('Origin', 'https://passport.weibo.cn')
+# req.add_header('User-Agent', 'Mozilla/6.0 (iPhone; CPU iPhone OS 8_0 like Mac OS X) AppleWebKit/536.26 (KHTML, like Gecko) Version/8.0 Mobile/10A5376e Safari/8536.25')
+# req.add_header('Referer', 'https://passport.weibo.cn/signin/login?entry=mweibo&res=wel&wm=3349&r=http%3A%2F%2Fm.weibo.cn%2F')
+
+# with request.urlopen(req, data=login_data.encode('utf-8')) as f:
+#     print('Status:', f.status, f.reason)
+#     for k, v in f.getheaders():
+#         print('%s: %s' % (k, v))
+#     print('Data:', f.read().decode('utf-8'))
+
+
+import web
+
+urls = (
+  '/', 'index'    )
+
+class index:
+	def GET(self):
+		print "Hello, world!"
+
+if __name__ == "__main__": web.run(urls, globals())
