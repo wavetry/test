@@ -279,13 +279,18 @@
 #     print('Data:', f.read().decode('utf-8'))
 
 
-import web
+# import web
 
-urls = (
-  '/', 'index'    )
+# urls = (
+#   '/', 'index'    )
 
-class index:
-	def GET(self):
-		print "Hello, world!"
+# class index:
+# 	def GET(self):
+# 		print "Hello, world!"
 
-if __name__ == "__main__": web.run(urls, globals())
+# if __name__ == "__main__": web.run(urls, globals())
+
+def is_palindrome(n):
+	return str(n) == str(n)[::-1]
+output = filter(is_palindrome, range(1, 1000))
+print(list(output))
