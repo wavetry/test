@@ -73,43 +73,63 @@
 # print "end!"
 
 
+# from PIL import Image
+
+# # 打开一个jpg图像文件，注意是当前路径:
+# im = Image.open('test.png')
+# # 获得图像尺寸:
+# w, h = im.size
+# print('Original image size: %sx%s' % (w, h))
+# # 缩放到50%:
+# im.thumbnail((w//2, h//2))
+# print('Resize image to: %sx%s' % (w//2, h//2))
+# # 把缩放后的图像用jpeg格式保存:
+# im.save('thumbnail.jpg', 'jpeg')
+
+# from PIL import Image,ImageFilter
+# im = Image.open('test.png')
+# im2 = im.filter(ImageFilter.BLUR)
+# im2.save('blur.jpg','jpeg')
+
+
+
 #生成验证码
-# from PIL import Image, ImageDraw, ImageFont, ImageFilter
-# import random
+from PIL import Image, ImageDraw, ImageFont, ImageFilter
+import random
 
-# # 随机字母:
-# def rndChar():
-#     return chr(random.randint(65, 90))
+# 随机字母:
+def rndChar():
+    return chr(random.randint(65, 90))
 
-# # 随机颜色1:
-# def rndColor():
-#     return (random.randint(127, 255), random.randint(127, 255), random.randint(127, 255))
+# 随机颜色1:
+def rndColor():
+    return (random.randint(127, 255), random.randint(127, 255), random.randint(127, 255))
 
-# # 随机颜色2:
-# def rndColor2():
-#     return (random.randint(32, 127), random.randint(32, 127), random.randint(32, 127))
+# 随机颜色2:
+def rndColor2():
+    return (random.randint(32, 127), random.randint(32, 127), random.randint(32, 127))
 
-# s = input('insert string:\n')
-# n=len(s)
-# # 240 x 60:
-# width = 60 * n
-# height = 60
-# image = Image.new('RGB', (width, height), (255, 255, 255))
-# # 创建Font对象:
-# font = ImageFont.truetype('/Library/Fonts/Libian.ttc', 36)
-# # 创建Draw对象:
-# draw = ImageDraw.Draw(image)
-# # 填充每个像素:
-# for x in range(width):
-#     for y in range(height):
-#         draw.point((x, y), fill=rndColor())
-# # 输出文字:
-# i=0
-# for t in s:
+s = input('insert string:\n')
+n=len(s)
+# 240 x 60:
+width = 60 * n
+height = 60
+image = Image.new('RGB', (width, height), (255, 255, 255))
+# 创建Font对象:
+font = ImageFont.truetype('/Library/Fonts/Microsoft/STXINWEI.ttf', 36)
+# 创建Draw对象:
+draw = ImageDraw.Draw(image)
+# 填充每个像素:
+for x in range(width):
+    for y in range(height):
+        draw.point((x, y), fill=rndColor())
+# 输出文字:
+i=0
+for t in s:
     
-#     draw.text((60 * i + 10, 10), t, font=font, fill=rndColor2())
-#     i=i+1
-# # 模糊:
-# image = image.filter(ImageFilter.BLUR)
-# name = ("%s.jpg"%s)
-# image.save(name, 'jpeg')
+    draw.text((60 * i + 10, 10), t, font=font, fill=rndColor2())
+    i=i+1
+# 模糊:
+image = image.filter(ImageFilter.CONTOUR)
+name = ("%s.jpg"%s)
+image.save(name, 'jpeg')

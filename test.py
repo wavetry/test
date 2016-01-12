@@ -34,12 +34,12 @@
 # print(dictionary.get('Aba',-1))
 
 #set
-# s = set([12,3,45])
+# s = set([12,5,45])
 # print(s)
 # s.remove(12)
 # s.add(45)
 # d = set([2,4,5])
-# print(s|d)
+# print(s&d)
 
 #
 ######
@@ -71,6 +71,7 @@
 #切片
 # ls = [1,2,3,4,]
 # print(ls[:3:2])
+# print("sadad"[::-1])
 
 #访问字典或者列表
 # dic = {'a':1,'b':2,'c':3}
@@ -278,19 +279,194 @@
 #         print('%s: %s' % (k, v))
 #     print('Data:', f.read().decode('utf-8'))
 
+# def log(func):
+# 	def wrapper(*args,**kw):
+# 		print('call %s():' % func)
+# 		return func(*args,**kw)
+# 	return wrapper
 
-# import web
+# # @log
+# def now():
+# 	print("linzhilang")
+# now = log(now)
+# now()
 
-# urls = (
-#   '/', 'index'    )
+#decorator
+# import functools
 
-# class index:
-# 	def GET(self):
-# 		print "Hello, world!"
+# def log(func):
+# 	@functools.wraps(func)
+# 	def wrapper(*args,**kw):
+# 		print('call %s ():' % func.__name__)
+# 		return func(*args,**kw)
+# 	return wrapper
 
-# if __name__ == "__main__": web.run(urls, globals())
+# def logg(text):
+# 	def decorator(func):
+# 		@functools.wraps(func)
+# 		def wrapper(*args,**kw):
+# 			print('%s %s ():' % (text,func.__name__))
+# 			r = func(*args,**kw)
+# 			print('end call')
+# 			return r
+# 		return wrapper
+# 	return decorator
 
-def is_palindrome(n):
-	return str(n) == str(n)[::-1]
-output = filter(is_palindrome, range(1, 1000))
-print(list(output))
+# @log
+# def now():
+# 	print("now")
+# now()
+
+#@property
+# class Screen(object):
+# 	"""docstring for Screen"""
+# 	@property
+# 	def width(self):
+# 	    return self._width
+# 	@width.setter
+# 	def width(self, value):
+# 	    self._width = value
+# 	@property
+# 	def height(self):
+# 	    return self._height
+# 	@height.setter
+# 	def height(self, value):
+# 	    self._height = value
+
+# 	@property
+# 	def resolution(self):
+# 	    return self._height*self._width
+	
+# 	def __init__(self):
+# 		super(Screen, self).__init__()
+
+		
+# s = Screen()
+# s.width = 1024
+# s.height = 768
+# print(s.resolution)
+# assert s.resolution == 786432, '1024 * 768 = %d ?' % s.resolution
+
+# class Student(object):
+#     def __init__(self, name):
+#         self.name = name
+#     def __str__(self):
+#         return 'Student object (name=%s)' % self.name
+#     __repr__ = __str__
+
+# class Fib(object):
+#     def __init__(self):
+#         self.a, self.b = 0, 1 # 初始化两个计数器a，b
+
+#     def __iter__(self):
+#         return self # 实例本身就是迭代对象，故返回自己
+
+#     def __next__(self):
+#         self.a, self.b = self.b, self.a + self.b # 计算下一个值
+#         if self.a > 100000: # 退出循环的条件
+#             raise StopIteration();
+#         return self.a # 返回下一个值
+#     def __getitem__(self, n):
+#         if isinstance(n, int): # n是索引
+#             a, b = 1, 1
+#             for x in range(n):
+#                 a, b = b, a + b
+#             return a
+#         if isinstance(n, slice): # n是切片
+#             start = n.start
+#             stop = n.stop
+#             if start is None:
+#                 start = 0
+#             a, b = 1, 1
+#             L = []
+#             for x in range(stop):
+#                 if x >= start:
+#                     L.append(a)
+#                 a, b = b, a + b
+#             return L
+# print(Fib()[2:5])
+
+#只有在没有找到属性的情况下，才调用__getattr__，已有的属性，比如name，不会在__getattr__中查找。
+
+# try:
+#     print('try...')
+#     r = 10 / int('2')
+#     print('result:', r)
+# except ValueError as e:
+#     print('ValueError:', e)
+# except ZeroDivisionError as e:
+#     print('ZeroDivisionError:', e)
+# else:
+#     print('no error!')
+# finally:
+#     print('finally...')
+# print('END')
+
+
+# import logging 
+# logging.basicConfig(level=logging.INFO)
+# def foo(s):
+# 	assert int(s) != 0,'n is zero'
+# 	logging.info('hahahaha')
+# 	return 10/int(s)
+# def bat(s):
+# 	return foo(s)*2
+# def main():
+# 	try:
+# 		bat('0')
+# 	except Exception as e:
+# 		logging.exception(e)
+# 	else:
+# 		pass
+# 	finally:
+# 		pass
+# main()
+# print('END')
+
+# from collections import namedtuple
+# Point = namedtuple('Point',['x','y'])
+# p = Point(1,2)
+# print(p.x,isinstance(p,tuple))
+
+# from collections import deque
+# q = deque(['1','2'])
+
+#md5验证
+import hashlib
+
+def calc_md5(password):
+	md5 = hashlib.md5()
+	md5.update(password.encode('utf-8'))
+	return md5.hexdigest()
+db = {
+    'michael': 'e10adc3949ba59abbe56e057f20f883e',
+    'bob': '878ef96e86145580c38c87f0410ad153',
+    'alice': '99b1c2188db85afee403b1536010c2c9'
+}
+
+def login(user,password):
+	md5 = hashlib.md5()
+	md5.update(password.encode('utf-8'))
+	print(md5.hexdigest())
+	if db[user] == md5.hexdigest():
+		return True
+	return False
+def get_md5(token):
+	md5 = hashlib.md5()
+	md5.update(token.encode('utf-8'))
+	return md5.hexdigest()
+
+dbs = {}
+def register(user,password):
+	db[user] = get_md5(password + user + 'the-Salt')
+
+def log_in(user,password):
+	md5 = hashlib.md5()
+	token = password + user + 'the-Salt'
+	md5.update(token.encode('utf-8'))
+	if db[user] == md5.hexdigest():
+		return True
+	return False
+register('michael','123456')
+print(log_in('michael','123456'))
+

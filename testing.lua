@@ -86,37 +86,34 @@
 
 
 --输入字符窜反转
-nextchar = io.read()
-local input = {}
-local i = 1
-while nextchar~=' ' and nextchar ~= '\n' do
-	if string.len(nextchar) > 1 then
-		print("too long ")
-	elseif string.len(nextchar) == 0 then
-		print("too short")
-	else
-		input[i] = nextchar
-		i = i + 1
-	end
-	nextchar = io.read()
-end
+-- nextchar = io.read()
+-- local input = {}
+-- local i = 1
+-- while nextchar~=' ' and nextchar ~= '\n' do
+-- 	if string.len(nextchar) > 1 then
+-- 		print("too long ")
+-- 	elseif string.len(nextchar) == 0 then
+-- 		print("too short")
+-- 	else
+-- 		input[i] = nextchar
+-- 		i = i + 1
+-- 	end
+-- 	nextchar = io.read()
+-- end
 
-function reverse( input )
-	local times = math.floor(#input/2)
-	local temp
-	for i=times,1,-1 do
-		temp = input[i]
-		input[i] = input[#input-i+1]
-		input[#input-i+1] = temp
-	end
-end
+-- function reverse( input )
+-- 	local times = math.floor(#input/2)
+-- 	local temp
+-- 	for i=times,1,-1 do
+-- 		temp = input[i]
+-- 		input[i] = input[#input-i+1]
+-- 		input[#input-i+1] = temp
+-- 	end
+-- end
 
-reverse( input )
+-- reverse( input )
 -- print(math.ldexp(1,16))
 
-
-for k,v in ipairs(input) do
-	print(k,v)
-end
+require("lfs")
 
 
