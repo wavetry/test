@@ -15,12 +15,12 @@ def calc(*numbers):
 	return sum
 
 ##**kw means dictionary 
-def person(name,age,**kw):
-	print('name:', name, 'age:', age, 'other:', kw)
+# def person(name,age,**kw):
+# 	print('name:', name, 'age:', age, 'other:', kw)
 
-#和关键字参数**kw不同，命名关键字参数需要一个特殊分隔符*，*后面的参数被视为命名关键字参数。
-def man(name, *,age):
-	print(name,age)
+# #和关键字参数**kw不同，命名关键字参数需要一个特殊分隔符*，*后面的参数被视为命名关键字参数。
+# def man(name, *,age):
+# 	print(name,age)
 
 #递归
 def fact(n):
@@ -124,24 +124,24 @@ def primes():
 # [x for x in os.listdir('.') if os.path.isfile(x) and os.path.splitext(x)[1]=='.py']
 
 #json
-import json
+# import json
 
-class Student(object):
-	def __init__(self, name, age, score):
-		self.name = name
-		self.age = age
-		self.score = score
+# class Student(object):
+# 	def __init__(self, name, age, score):
+# 		self.name = name
+# 		self.age = age
+# 		self.score = score
 	
-def student2dict(std):
-		return {
-	    	'name': std.name,
-	    	'age': std.age,
-	    	'score': std.score
-	    	}
-s = Student('Bob', 20, 88)
-print(json.dumps(s, default=student2dict))
+# def student2dict(std):
+# 		return {
+# 	    	'name': std.name,
+# 	    	'age': std.age,
+# 	    	'score': std.score
+# 	    	}
+# s = Student('Bob', 20, 88)
+# print(json.dumps(s, default=student2dict))
 
-print(json.dumps(s, default=lambda s: s.__dict__))
+# print(json.dumps(s, default=lambda s: s.__dict__))
 
 # '''
 # 遍历当前目录及其子目录下文件名包含指定字符串的文件的绝对路径
@@ -159,9 +159,9 @@ print(json.dumps(s, default=lambda s: s.__dict__))
 #             fun(name,tpath,res)
 #     return res
 
-# L = fun('t')
-# for x
-# print(L,len(L))
+# L = fun('test')
+# for x in L:
+# 	print (x)
 #-*- coding:utf-8 -*-
 
 # __author__ = '打补丁的狮子'
@@ -193,3 +193,22 @@ print(json.dumps(s, default=lambda s: s.__dict__))
 #         else:
 #             print("无效的参数，请输入-？或-h参数来获取帮助信息！")
 
+#client tcp
+# import socket
+# s = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
+# s.connect(('127.0.0.1',9999))
+# print(s.recv(1024).decode('utf-8'))
+# for data in [b'Michael', b'Tracy', b'Sarah']:
+# 	s.send(data)
+# 	print(s.recv(1024).decode('utf-8'))
+# s.send(b'exit')
+# s.close()
+#server udp
+import socket
+s = socket.socket(socket.AF_INET,socket.SOCK_DGRAM)
+s.bind(("127.0.0.1",9999))
+print("Bind UDP on 9999")
+while True:
+	data,addr = s.recvfrom(1024)
+	print("Received from %s:%s." % addr)
+	s.sendto(b'Hello,%s!' % data,addr)
