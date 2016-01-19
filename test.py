@@ -517,10 +517,44 @@
 # 	t = threading.Thread(target = tcplink,args = (sock,addr))
 # 	t.start()
 
-#client udp
-import socket
-s = socket.socket(socket.AF_INET,socket.SOCK_DGRAM)
-for data in [b'Michael', b'Tracy', b'Sarah']:
-	s.sendto(data,('127.0.0.1',9999))
-	print(s.recv(1024).decode('utf-8'))
-s.close()
+#client udp ooxblzriwvzxbcfh gjqhzovqkcnozron
+# import socket
+# s = socket.socket(socket.AF_INET,socket.SOCK_DGRAM)
+# for data in [b'Michael', b'Tracy', b'Sarah']:
+# 	s.sendto(data,('127.0.0.1',9999))
+# 	print(s.recv(1024).decode('utf-8'))
+# s.close()
+
+#SMTP email insterting
+# from email import encoders
+# from email.header import Header
+# from email.mime.text import MIMEText
+# from email.utils import parseaddr, formataddr
+
+# import smtplib
+
+# def _format_addr(s):
+#     name, addr = parseaddr(s)
+#     return formataddr((Header(name, 'utf-8').encode(), addr))
+
+# from_addr = '15989193326@163.com'
+# password = 'gjqhzovqkcnozron'
+# to_addr = "15989193326@163.com"
+# smtp_server = "smtp.163.com"
+
+# msg = msg = MIMEText('<html><body><h1>Hello</h1>' +
+#     '<p>send by handsome boy' +
+#     '</body></html>', 'html', 'utf-8')
+# msg['From'] = _format_addr('天下第一帅 <%s>' % from_addr)
+# msg['To'] = _format_addr('煞笔无吊 <%s>' % to_addr)
+# msg['Subject'] = Header('吴伟豪 你这么这么春呢', 'utf-8').encode()
+
+# server = smtplib.SMTP(smtp_server, 25)
+# server.set_debuglevel(1)
+# server.login(from_addr, password)
+# i=input("Number: ")
+# while i >0:
+# 	server.sendmail(from_addr, [to_addr], msg.as_string())
+# 	i = i-1
+
+# server.quit()
