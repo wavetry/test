@@ -1,4 +1,4 @@
-# _*_ coding:utf-8
+# _*_ coding:utf-8 _*_
 import urllib
 import urllib2
 import re
@@ -22,7 +22,7 @@ class QSBK():
 		except urllib2.URLError,e:
 			if hasattr(e,'code'):
 				print e.code
-			if hasattr(e,'readon'):
+			if hasattr(e,'reason'):
 				print e.reason
 				return None
 

@@ -3,23 +3,23 @@
 -- until line ~= ""
 -- print(line)
 
--- function add( ... )
---   local a,b = ...
---   return a,...
--- end
+function add( ... )
+  local a,b = ...
+  return a,...
+end
 -- print(add(1,2,3,4,3,4,21)) 
 
--- function recrusive( ... )
---   print("r",...)
---   recrusive(...)
--- end
+function recrusive( ... )
+  print("r",...)
+  recrusive(...)
+end
 -- recrusive(1)
 
--- function function_name( ... )
---   for i = 1,select('#',...) do
---     print(select(i,...))
---   end
--- end
+function function_name( ... )
+  for i = 1,select('#',...) do
+    print(select(i,...))
+  end
+end
 
 -- function_name(1,2)
 
@@ -42,6 +42,15 @@
 --   end
 -- end
 -- print(fact(5))
+
+-- function face( n )
+--   if 0 == n then
+--     return 1
+--   else
+--     return face(n - 1)* n
+--   end
+-- end
+-- print(face(5))
 
 -- local f,g
 -- local function f( ... )
@@ -73,27 +82,34 @@ function allwords(  )
   return function ( )
     while(line )do
       local s,e = string.find(line,"%w+",pos)
+      print("ss",s,e)
       if s then
         pos = e + 1
-        return string.sub(line,s ,e)
+         
+         local df = string.sub(line,s ,e)
+         print("sssss",pos,e,df)
+        return df
       else
-        line = io.read()
+        line = nil
         pos = 1
       end
     end
     return nil
   end
 end
+
 -- for word in allwords() do
 --   print(word)
 -- end
+
+
 -- function foo( n )
 --   assert(n == 0,"n should not be zero "..n)
 -- end
--- function er( ... )
+-- local er =  function( ... )
 --   return "asdasd"
 -- end
--- local r,e = xpcall(foo(0))
+-- local r,e = xpcall(er)
 -- print(r,e)
 
 --协同程序
@@ -112,48 +128,48 @@ end
 -- coroutine.resume(co)
 -- coroutine.resume(co)
 -- coroutine.resume(co)
--- coroutine.resume(co)
+-- coroutine.resume(co)  
 -- print(coroutine.status(co))
 -- print(coroutine.resume(co)) 
 -- print(coroutine.resume(co)) 
 
 --生产者消费者模型
--- function receive( prod )
---   local status,value = coroutine.resume(prod)
---   print("receive",value)
---   return value
--- end
+function receive( prod )
+  local status,value = coroutine.resume(prod)
+  print("receive",value)
+  return value
+end
 
--- function send( x )
--- print("send",x)
---   coroutine.yield(x)
--- end
+function send( x )
+print("send",x)
+  coroutine.yield(x)
+end
 
--- function producer( )
---   return coroutine.create(function ( )
---     while true do
---       local x = io.read()
---       send(x)
---     end
---   end)
--- end
+function producer( )
+  return coroutine.create(function ( )
+    while true do
+      local x = io.read()
+      send(x)
+    end
+  end)
+end
 
--- function filter( prod )
---   return coroutine.create(function (  )
---     for line = 1,math.huge do
---       local x = receive(prod)
---       x = string.format("%5d %s",line,x)
---       send(x)
---     end
---   end)
--- end
+function filter( prod )
+  return coroutine.create(function (  )
+    for line = 1,math.huge do
+      local x = receive(prod)
+      x = string.format("%5d %s",line,x)
+      send(x)
+    end
+  end)
+end
 
--- function consumer( prod )
---   while true do
---     local x = receive(prod)
---     io.write(x,"\n")
---   end
--- end
+function consumer( prod )
+  while true do
+    local x = receive(prod)
+    io.write(x,"\n")
+  end
+end
 -- p = producer()
 -- f = filter(p)
 -- consumer(f)

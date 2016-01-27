@@ -114,6 +114,5 @@
 -- reverse( input )
 -- print(math.ldexp(1,16))
 
-require("lfs")
 
 
