@@ -42,7 +42,7 @@ class BDTB():
 		self.tool = Tool()
 		self.file = None
 		self.floor = 1
-		self.defaultTitle = u'百度贴吧'
+		self.defaultTitle = 'baidu'
 		self.floorTag = floorTag
 
 		self.user_agent = "Mozilla/4.0 (compatible; MSIE 5.5; Windows NT)"
@@ -126,6 +126,7 @@ class BDTB():
 			pass
 		finally:
 			print '写入任务完成'
+			open('baidu.txt')
 
 print u'请写入帖子代号'
 baseUrl = 'http://tieba.baidu.com/p/'+str(raw_input(u'http://tieba.baidu.com/p/'))
