@@ -3,9 +3,26 @@ from urllib.request import urlopen
 from urllib import request
 from bs4 import BeautifulSoup
 from urllib.request import urlretrieve
-import os
+import os,signal
 import random,time
-import re,sys
+import re,sys,socket
+def timeout(secs=10):
+	'''kill function and exit if function run timeout, default is 30 seconds'''
+	def deco(func):
+		def _handle_timeout_(signum, frame):
+			print('Function %s called timeout' % func.__name__) 
+			# sys.exit(3)
+	
+		def _deco_(*args, **kwargs):
+			signal.signal(signal.SIGALRM, _handle_timeout_)
+			signal.alarm(secs)
+			try:
+				result = func(*args, **kwargs)
+			finally:
+				signal.alarm(0)
+			return result
+		return _deco_
+	return deco
 
 class spider():
 	"""docstring for spider"""
@@ -101,11 +118,15 @@ class spider():
 		path = self.dirs+name+".jpg"
 		isExists = os.path.exists(os.path.join(path))
 		if not isExists:
-			urlretrieve(img_url,path)
-			return True
-		else:
-			return False
-		
+			self.auto_down(img_url,path)
+
+	@timeout(secs=5)
+	def auto_down(self,url,filename):
+		try:
+			urlretrieve(url,filename)
+		except Exception:
+			pass
+			
 
 	def mkdir(self,path,txt):
 		path = path.strip()
@@ -133,9 +154,10 @@ class spider():
 			self.mkdir(title[0:250],a.get_text())
 			if index > int(start_page):
 				self.html(href)
-			time.sleep(random.random())
+				time.sleep(random.random())
+			
 			print("page:",index)
-
+socket.setdefaulttimeout(2)
 targetUrl = "http://v.yupoo.com/photos/xilizhenbiao/albums/"
 sp = spider()
 sp.all_url(targetUrl,sys.argv[1])
