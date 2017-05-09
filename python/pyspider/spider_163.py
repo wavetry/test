@@ -24,14 +24,13 @@ def timeout(secs=10):
 			return result
 		return _deco_
 	return deco
-
+#http://music.163.com/#/m/song?id=21799194
 class spider():
 	"""docstring for spider"""
 	def __init__(self):
 		self.dirs = ""
-		self.img_nums = 0
-		self.site_head = 'http://v.yupoo.com'
-		self.suffixpath = "/Users/youai/Documents/5"
+		self.site_head = 'http://music.163.com/song?id=1'
+		self.suffixpath = "/Users/youai/Documents/6"
 		self.user_agent_list = [
 			"Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.1 (KHTML, like Gecko) Chrome/22.0.1207.1 Safari/537.1",
 			"Mozilla/5.0 (X11; CrOS i686 2268.111.0) AppleWebKit/536.11 (KHTML, like Gecko) Chrome/20.0.1132.57 Safari/536.11",
@@ -77,92 +76,29 @@ class spider():
 		except Exception:
 			print("error",url)
 		return res
-		
-
-
-	# def request_url(self,url):
-	# 	res = ""
-	# 	try:
-	# 		res = urlopen(url)
-	# 	except Exception:
-	# 		print("error",url)
-	# 	return res
-
-	def html(self,href):
-		html = self.request_url(href)
-		if html == "":
-			print("html is empty string")
-			return
-		html_bsObj = BeautifulSoup(html)
-
-		imgs = html_bsObj.find('table',class_='DayView').find_all('img')
-		index = 0
-		print("len of imgs",len(imgs))
-		for img in imgs:
-			img_url = img['src']
-			print(img_url)
-			index = index + 1
-			self.img_nums = self.img_nums + 1
-			self.save(img_url,index)
-
-		print("图片总数：",self.img_nums)
-
-	def img(self,pageUrl):
-		img_html = self.request_url(pageUrl)
-		img_bsObj = BeautifulSoup(img_html)
-		tg = img_bsObj.find('div',class_='main-image')
-		if tg is not None:
-			img_url = tg.find('img')['src']
-			self.save(img_url)
-
-	def save(self,img_url,index):
-		name= str(index)
-		path = self.dirs+name+".jpg"
-		isExists = os.path.exists(os.path.join(path))
-		if not isExists:
-			self.auto_down(img_url,path)
-
-	@timeout(secs=5)
-	def auto_down(self,url,filename):
-		try:
-			urlretrieve(url,filename)
-		except Exception:
-			pass
-			
-
-	def mkdir(self,path,txt):
-		path = path.strip()
-		isExists = os.path.exists(os.path.join(self.suffixpath,path))
-		if not isExists:
-			os.makedirs(os.path.join(self.suffixpath,path))
-		os.chdir(os.path.join(self.suffixpath,path))
-		with open('desc.txt','w') as f:
-			f.write(txt)
 
 	def all_url(self,url,start_page=0):
 		start_html = self.request_url(url)
-		print(start_html)
 		bsObj = BeautifulSoup(start_html)
-		a_list = bsObj.findAll('a',class_='Seta')
+		div_list = bsObj.findAll('div',class_='tt')
 		index = 0
-		print("总页数：",len(a_list))
-		for a in a_list:
-			title = a.get_text()
-			title = re.sub('/',' ',title)
-			index = index + 1
-			title = str(index) + '_' + title
-			href = self.site_head + a['href'] + "?style=story"
+		print("总页数：",div_list)
+		# for a in a_list:
+		# 	title = a.get_text()
+		# 	title = re.sub('/',' ',title)
+		# 	index = index + 1
+		# 	title = str(index) + '_' + title
+		# 	href = self.site_head + a['href'] + "?style=story"
 			
-			# print(href)
-			self.mkdir(title[0:250],a.get_text())
-			if index > int(start_page):
-				self.html(href)
-				time.sleep(random.random())
+		# 	# print(href)
+		# 	self.mkdir(title[0:250],a.get_text())
+		# 	if index > int(start_page):
+		# 		self.html(href)
+		# 		time.sleep(random.random())
 			
-			print("page:",index)
+		# 	print("page:",index)
+		#471403427
 socket.setdefaulttimeout(2)
-targetUrl = "http://v.yupoo.com/photos/xilizhenbiao/albums/"
+targetUrl = "http://music.163.com/#/discover/toplist"
 sp = spider()
 sp.all_url(targetUrl,1)
-
-		

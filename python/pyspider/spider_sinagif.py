@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*- 
+# coding: utf-8
 from urllib.request import urlopen
 from urllib import request
 from bs4 import BeautifulSoup
@@ -26,12 +26,11 @@ def timeout(secs=10):
 	return deco
 
 class spider():
-	"""docstring for spider"""
 	def __init__(self):
 		self.dirs = ""
 		self.img_nums = 0
-		self.site_head = 'http://v.yupoo.com'
-		self.suffixpath = "/Users/youai/Documents/5"
+		self.site_head = ""
+		self.suffixpath = "/Users/youai/Documents/6"
 		self.user_agent_list = [
 			"Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.1 (KHTML, like Gecko) Chrome/22.0.1207.1 Safari/537.1",
 			"Mozilla/5.0 (X11; CrOS i686 2268.111.0) AppleWebKit/536.11 (KHTML, like Gecko) Chrome/20.0.1132.57 Safari/536.11",
@@ -53,14 +52,12 @@ class spider():
 			"Mozilla/5.0 (Windows NT 6.2; WOW64) AppleWebKit/535.24 (KHTML, like Gecko) Chrome/19.0.1055.1 Safari/535.24"
 		]
 
-		self.iplist = []
-		html = self.request_url("http://haoip.cc/tiqu.htm")
-		iplistn = re.findall(r'r/>(.*?)<b',html,re.S)
-		for ip in iplistn:
-			i = re.sub('\n','',ip)
-			self.iplist.append(i.strip())
-
-		
+		# self.iplist = []
+		# html = self.request_url("http://haoip.cc/tiqu.htm")
+		# iplistn = re.findall(r'r/>(.*?)<b',html,re.S)
+		# for ip in iplistn:
+		# 	i = re.sub('\n','',ip)
+		# 	self.iplist.append(i.strip())
 
 	def request_url(self,url):
 		UA = random.choice(self.user_agent_list)
@@ -71,22 +68,12 @@ class spider():
 			with request.urlopen(req) as f:
 				print('Status:',f.status,f.reason)
 				if f.status == 200:
-					res = f.read().decode('utf-8')
+					res = f.read().decode('GBK')
 				else:
 					return ""
-		except Exception:
-			print("error",url)
+		except Exception as e:
+			print("error",e)
 		return res
-		
-
-
-	# def request_url(self,url):
-	# 	res = ""
-	# 	try:
-	# 		res = urlopen(url)
-	# 	except Exception:
-	# 		print("error",url)
-	# 	return res
 
 	def html(self,href):
 		html = self.request_url(href)
@@ -94,31 +81,20 @@ class spider():
 			print("html is empty string")
 			return
 		html_bsObj = BeautifulSoup(html)
-
-		imgs = html_bsObj.find('table',class_='DayView').find_all('img')
-		index = 0
-		print("len of imgs",len(imgs))
-		for img in imgs:
-			img_url = img['src']
-			print(img_url)
-			index = index + 1
-			self.img_nums = self.img_nums + 1
-			self.save(img_url,index)
-
-		print("图片总数：",self.img_nums)
+		imgs = html_bsObj.find()
 
 	def img(self,pageUrl):
 		img_html = self.request_url(pageUrl)
 		img_bsObj = BeautifulSoup(img_html)
-		tg = img_bsObj.find('div',class_='main-image')
+		tg = img_bsObj.find('div',)
 		if tg is not None:
 			img_url = tg.find('img')['src']
 			self.save(img_url)
 
 	def save(self,img_url,index):
-		name= str(index)
-		path = self.dirs+name+".jpg"
-		isExists = os.path.exists(os.path.join(path))
+		name = str(index)
+		path = self.dirs + name + '.gif'
+		isExist = os.path.exists(os.path.join(path))
 		if not isExists:
 			self.auto_down(img_url,path)
 
@@ -128,7 +104,6 @@ class spider():
 			urlretrieve(url,filename)
 		except Exception:
 			pass
-			
 
 	def mkdir(self,path,txt):
 		path = path.strip()
@@ -143,26 +118,28 @@ class spider():
 		start_html = self.request_url(url)
 		print(start_html)
 		bsObj = BeautifulSoup(start_html)
-		a_list = bsObj.findAll('a',class_='Seta')
+		item_list = bsObj.findAll('dd')
 		index = 0
-		print("总页数：",len(a_list))
-		for a in a_list:
-			title = a.get_text()
-			title = re.sub('/',' ',title)
-			index = index + 1
-			title = str(index) + '_' + title
-			href = self.site_head + a['href'] + "?style=story"
+		print(item_list)
+
+		# print("总页数：",len(a_list))
+		# for a in a_list:
+		# 	title = a.get_text()
+		# 	title = re.sub('/',' ',title)
+		# 	index = index + 1
+		# 	title = str(index) + '_' + title
+		# 	href = self.site_head + a['href'] + "?style=story"
 			
-			# print(href)
-			self.mkdir(title[0:250],a.get_text())
-			if index > int(start_page):
-				self.html(href)
-				time.sleep(random.random())
+		# 	# print(href)
+		# 	self.mkdir(title[0:250],a.get_text())
+		# 	if index > int(start_page):
+		# 		self.html(href)
+		# 		time.sleep(random.random())
 			
-			print("page:",index)
+		# 	print("page:",index)
+
+
 socket.setdefaulttimeout(2)
-targetUrl = "http://v.yupoo.com/photos/xilizhenbiao/albums/"
+targetUrl = u"http://slide.astro.sina.com.cn/gif/slide_52_42283_50529.html#p=1"
 sp = spider()
 sp.all_url(targetUrl,1)
-
-		

@@ -89,10 +89,3 @@ if __name__ == '__main__':
 	
 	filter_file(path,ext)
 	print ("Done")
-
-	for extfile in ext_files:
-		
-
-
-
-

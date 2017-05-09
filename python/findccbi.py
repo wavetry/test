@@ -18,7 +18,7 @@ def findccbi(path,ext):
 		script_files.append(obj)
 
 		with open(full_path,'r') as f:
-			res = re.search(r'ccbi\/\S+ccbi',f.read())
+			res = re.search(r'ccbi\/\S+'ccbi,f.read())
 			if res:
 				script_strings.append(file_name + "-----" + res.group(0))
 	result =  "\n".join(script_strings)
