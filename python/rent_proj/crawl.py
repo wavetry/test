@@ -14,7 +14,7 @@ csv_writer = csv.writer(csv_file, delimiter=',')
 
 while True:
     page += 1
-    print "fetch: ", url.format(page=page)
+    print ("fetch: ", url.format(page=page))
     response = requests.get(url.format(page=page))
     html = BeautifulSoup(response.text)
     house_list = html.select(".list > li")

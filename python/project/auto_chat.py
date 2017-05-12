@@ -17,7 +17,7 @@ def get_response(msg):
 		return r.get('text')
 	except:
 		return 
-@itchat.msg_register([TEXT, MAP, CARD, NOTE, SHARING])
+@itchat.msg_register([ MAP, CARD, NOTE, SHARING])
 def text_reply(msg):
 	msg.user.send('%s: %s' % (msg.type, msg.text))
 
@@ -34,8 +34,13 @@ def add_friends(msg):
 	msg.user.verify()
 	msg.user.send('Nice to meet you!')
 
-
 @itchat.msg_register(TEXT,isGroupChat=True)
+def group_reply(msg):
+	defaultReply = 'I receive: ' + msg['Text']
+	reply = get_response(msg['Text'])
+	return reply or defaultReply
+
+@itchat.msg_register(TEXT)
 def tuling_reply(msg):
 	defaultReply = 'I receive: ' + msg['Text']
 	reply = get_response(msg['Text'])
@@ -45,7 +50,7 @@ msg = u'发给%s的消息'
 # myself = itchat.get_friends(update = True)[0] #myself
 # itchat.send(msg % (myself['DisplayName'] or myself['NickName']),myself['UserName'])
 
-man  = itchat.search_friends(name=u'座伊磊司')[0]
+man  = itchat.search_friends(name=u'勇初')[0]
 print(man)
 
 for index in range(1):

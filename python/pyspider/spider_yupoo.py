@@ -141,7 +141,6 @@ class spider():
 
 	def all_url(self,url,start_page=0):
 		start_html = self.request_url(url)
-		print(start_html)
 		bsObj = BeautifulSoup(start_html)
 		a_list = bsObj.findAll('a',class_='Seta')
 		index = 0

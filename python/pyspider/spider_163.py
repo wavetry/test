@@ -102,3 +102,45 @@ socket.setdefaulttimeout(2)
 targetUrl = "http://music.163.com/#/discover/toplist"
 sp = spider()
 sp.all_url(targetUrl,1)
+
+def simpilify_async_package(params , androidPackage= None, iosPackage= None):
+	global PUBLISHING_CCB, ADDONS_PACKAGEING
+	global SVNUPDATEING, CODE_UPDATE_LOG, RESOURCE_UPDATE_LOG
+
+	CODE_UPDATE_LOG = None
+	RESOURCE_UPDATE_LOG = None
+	sync_svn_update()
+	if None != CODE_UPDATE_LOG:
+		params.append("--svnCodeLog=%s" % base64.b64encode(CODE_UPDATE_LOG) )
+	if None != RESOURCE_UPDATE_LOG:
+		params.append("--svnResLog=%s" % base64.b64encode(RESOURCE_UPDATE_LOG) )
+	pass
+
+	if SVNUPDATEING:
+		return
+
+	if ADDONS_PACKAGEING:
+		return
+	sync_publish_ccb()
+
+	params = " ".join(params)
+	print "参数：", params
+
+	if "on" == androidPackage:
+		print "androidPackage:" ,androidPackage
+		os.system("cd ../project/package_script/;python android_package_script.py %s" % params)
+
+	if "on" == iosPackage:
+		print "iosPackage:",iosPackage
+		os.system("cd ../project/package_script/;python ios_package_script.py %s" % params)
+
+	if "" != desc:
+		save_desc(begin_time, desc)
+
+
+
+
+
+
+
+

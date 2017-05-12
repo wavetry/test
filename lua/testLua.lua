@@ -262,4 +262,18 @@ end
 -- a:write("123123123")
 -- a:close()
 
+local time = os.clock()
+for i = 1,100 do
+  -- while true do
+  --   if i % 2 == 1 then break end
+  --   print("===========",i)
+  --   break
+  -- end  
+  if i % 2 == 1 then
+  else
+    print("------",i)
+  end
+end
+print(os.clock() - time)
+
 print("testLua testLua testLua testLua")

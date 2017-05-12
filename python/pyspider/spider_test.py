@@ -272,45 +272,51 @@
 # auth)
 # print(r.text)
 
-import requests
-import re
-import os
-from bs4 import BeautifulSoup
+# import requests
+# import re
+# import os
+# from bs4 import BeautifulSoup
 
-def get_format_filename(input_filename):
-	symbol=['?','*','<','>','!']
-	for s in symbol:
-		while s in input_filename:
-			input_filename=input_filename.strip().replace(s,'')
-	return input_filename
+# def get_format_filename(input_filename):
+# 	symbol=['?','*','<','>','!']
+# 	for s in symbol:
+# 		while s in input_filename:
+# 			input_filename=input_filename.strip().replace(s,'')
+# 	return input_filename
 
-file_path = "/Users/youai/Documents/3"
-headers = {
-'User-Agent':'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.6) Gecko/20091201 Firefox/3.5.6',
-"Connection":"keep-alive",
-"Accept-Encoding": "gzip",
-"Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8"
-}
+# file_path = "/Users/youai/Documents/7"
+# headers = {
+# 'User-Agent':'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.6) Gecko/20091201 Firefox/3.5.6',
+# "Connection":"keep-alive",
+# "Accept-Encoding": "gzip",
+# "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8"
+# }
 
-URL_part1 = "http://r3.gcsit1.website"
-URL_part2 = "/pw/thread.php?fid=21"
-URL = URL_part1 + URL_part2
+# URL_part1 = "http://r3.gcsit1.website"
+# URL_part2 = "/pw/thread.php?fid=21"
+# URL = URL_part1 + URL_part2
 
-start_html = requests.get(URL,headers=headers)
-start_html.encoding="utf-8"
-bsObj = BeautifulSoup(start_html.text,"html.parser")
-print("bsObj",bsObj)
+# start_html = requests.get(URL,headers=headers)
+# start_html.encoding="utf-8"
+# bsObj = BeautifulSoup(start_html.text,"html.parser")
+# print("bsObj",bsObj)
 
-for a in bsObj.find("tbody",{"style":"table-layout:fixed"}).findAll("a"):
-	if ("href" in a.attrs) and ("title" not in a.attrs):
-		if re.match(r'^htm_data/.+.html',a.attrs['href']):
-			a_path = get_format_filename(a.text)
-			if not os.path.exists(os.path.join(file_path,a_path)):
-				os.makedirs(os.path.join(file_path,a_path))
-			os.chdir(file_path+'/'+a_path)
-			print(file_path+'/'+a_path)
-			f = open(a_path+".txt",'w')
-			f.write(a.attrs['href'])
+# for a in bsObj.find("tbody",{"style":"table-layout:fixed"}).findAll("a"):
+# 	if ("href" in a.attrs) and ("title" not in a.attrs):
+# 		if re.match(r'^htm_data/.+.html',a.attrs['href']):
+# 			a_path = get_format_filename(a.text)
+# 			if not os.path.exists(os.path.join(file_path,a_path)):
+# 				os.makedirs(os.path.join(file_path,a_path))
+# 			os.chdir(file_path+'/'+a_path)
+# 			print(file_path+'/'+a_path)
+# 			f = open(a_path+".txt",'w')
+# 			f.write(a.attrs['href'])
+
+from selenium import webdriver
+
+browser = webdriver.Chrome()
+browser,get("http://www.baidu.com/")
+
 
 
 
