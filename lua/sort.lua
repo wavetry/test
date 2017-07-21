@@ -46,12 +46,15 @@ end
 
 --插入排序
 local function insertSort( array )
-	for i = 1,#array do
-		for j = i,#array do
-			if array[j] < array[i] then
-				array[i],array[j] = array[j],array[i]
-			end
+	local i
+	for i = 2,#array do
+		local j = i - 1
+		local temp = array[i]
+		while(j>=1 and array[j] > temp) do
+			array[j+1] = array[j]
+			j = j - 1
 		end
+		array[j+1] = temp
 	end
 end
 
@@ -122,7 +125,8 @@ local function quickSort1( array,low,high )
 end
 
 local test = {1,23,5,6,2,34,62,34,6,23,6,2,4,6}
-quickSort1(test,1,#test)
+-- quickSort1(test,1,#test)
+insertSort(test)
 printA(test)
 
 
