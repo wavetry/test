@@ -39,8 +39,7 @@ while 1:
                 client_socket.sendall("\n")
  
             client_socket.sendall("ok")
- 
- 
+
     except Exception, e:
         traceback.print_exc()
  

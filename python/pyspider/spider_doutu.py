@@ -1,14 +1,11 @@
-# -*- coding: utf-8 -*- 
+# _*_ coding: utf-8 _*_
 from urllib.request import urlopen
 from urllib import request
 from bs4 import BeautifulSoup
 from urllib.request import urlretrieve
 import os,signal
 import random,time
-import re,sys,socket
-import threading
-
-lock = threading.Lock()
+import re.sys.socket
 
 def timeout(secs=10):
 	'''kill function and exit if function run timeout, default is 30 seconds'''
@@ -33,8 +30,8 @@ class spider():
 	def __init__(self):
 		self.dirs = ""
 		self.img_nums = 0
-		self.site_head = 'http://v.yupoo.com'
-		self.suffixpath = "/Users/youai/Documents/5"
+		self.site_head = 'https://www.doutula.com/photo/list/'
+		self.suffixpath = "/Users/youai/Documents/doutula"
 		self.user_agent_list = [
 			"Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.1 (KHTML, like Gecko) Chrome/22.0.1207.1 Safari/537.1",
 			"Mozilla/5.0 (X11; CrOS i686 2268.111.0) AppleWebKit/536.11 (KHTML, like Gecko) Chrome/20.0.1132.57 Safari/536.11",
@@ -80,16 +77,6 @@ class spider():
 		except Exception:
 			print("error",url)
 		return res
-		
-
-
-	# def request_url(self,url):
-	# 	res = ""
-	# 	try:
-	# 		res = urlopen(url)
-	# 	except Exception:
-	# 		print("error",url)
-	# 	return res
 
 	def html(self,href):
 		html = self.request_url(href)
@@ -124,7 +111,6 @@ class spider():
 		isExists = os.path.exists(os.path.join(path))
 		if not isExists:
 			self.auto_down(img_url,path)
-
 	@timeout(secs=5)
 	def auto_down(self,url,filename):
 		try:
@@ -162,9 +148,8 @@ class spider():
 				time.sleep(random.random())
 			
 			print("page:",index)
+			
 socket.setdefaulttimeout(2)
-targetUrl = "http://v.yupoo.com/photos/xilizhenbiao/albums/"
+targetUrl = "https://www.doutula.com/photo/list/?page="
 sp = spider()
 sp.all_url(targetUrl,1)
-
-		
