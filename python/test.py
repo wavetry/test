@@ -734,8 +734,41 @@
 
 
 #python cookbook
-f,*m,l = [1,2,3,4,5,6,7]
-print(m)
+# f,*m,l = [1,2,3,4,5,6,7]
+# print(m)
+
+import re,struct
+import hashlib,json
+a = 20
+b = 400
+str = struct.pack("ii",a,b)
+print 'length:',len(str)
+print str
+print repr(str)
+
+md5 = hashlib.md5()
+md5.update('how to use md5 in python hashlib?')
+print md5.hexdigest()
+
+sha1 = hashlib.sha1()
+sha1.update('how to use sha1 in ')
+sha1.update('python hashlib?')
+print sha1.hexdigest()
+
+data = ['aa','bb','cc']
+j_str = json.dumps(data)
+print j_str
+
+mes = json.loads(j_str)
+print mes
+
+with open('test.json','w') as f:
+	json.dump(data,f)
+
+
+with open('test.json','r') as f:
+	data = json.load(f)
+
 
 
 

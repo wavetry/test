@@ -313,10 +313,53 @@
 # 			f.write(a.attrs['href'])
 
 from selenium import webdriver
+from selenium.webdriver.common.keys import Keys
 
-browser = webdriver.Chrome()
-browser,get("http://www.baidu.com/")
+driver = webdriver.Chrome()
+driver.get("https://credit.u51.com/youhui/p4/")
+# elem = driver.find_element_by_name("q")
+# elem.send_keys("pycon")
+# elem.send_keys(Keys.RETURN)
+print driver.page_source
 
+
+# import unittest
+# from selenium import webdriver
+# from selenium.webdriver.common.keys import Keys
+
+# class PythonOrgSearch(unittest.TestCase):
+
+#     def setUp(self):
+#         self.driver = webdriver.Chrome()
+
+#     def test_search_in_python_org(self):
+#         driver = self.driver
+#         driver.get("http://www.python.org")
+#         self.assertIn("Python", driver.title)
+#         elem = driver.find_element_by_name("q")
+#         elem.send_keys("pycon")
+#         elem.send_keys(Keys.RETURN)
+#         assert "No results found." not in driver.page_source
+
+#     def tearDown(self):
+#         self.driver.close()
+
+# if __name__ == "__main__":
+#     unittest.main()
+
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+
+driver = webdriver.Chrome()
+driver.get("http://somedomain/url_that_delays_loading")
+try:
+    element = WebDriverWait(driver, 10).until(
+        EC.presence_of_element_located((By.ID, "myDynamicElement"))
+    )
+finally:
+    driver.quit()
 
 
 

@@ -3,7 +3,6 @@ import urllib
 import urllib2
 import re
 import sys
-
 reload(sys)
 sys.setdefaultencoding('utf8')
 

@@ -204,6 +204,8 @@ def primes():
 # s.send(b'exit')
 # s.close()
 #server udp
+#!/usr/bin/env python
+#_*_ coding:utf-8 _*_
 import socket
 s = socket.socket(socket.AF_INET,socket.SOCK_DGRAM)
 s.bind(("127.0.0.1",9999))

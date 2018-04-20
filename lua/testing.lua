@@ -220,40 +220,40 @@
 -- end
 
 --datastructure by lua
-List = {}
-function List.new( ... )
-	return {first = 0,last = -1}
-end
+-- List = {}
+-- function List.new( ... )
+-- 	return {first = 0,last = -1}
+-- end
 
-function List.pushFront(list,value )
-	list.first = list.first - 1
-	list[list.first]=value
-end
+-- function List.pushFront(list,value )
+-- 	list.first = list.first - 1
+-- 	list[list.first]=value
+-- end
 
-function List.pushBack( list,value )
-	list.last = list.last + 1
-	list[list.last] = value
-end
+-- function List.pushBack( list,value )
+-- 	list.last = list.last + 1
+-- 	list[list.last] = value
+-- end
 
-function List.popFront( list )
-	local first = list.first
-	if first > list.last then error("List id empty!") end
-	local value = list[first]
-	list[first] = nil
-	list.first = first + 1
-	return value
-end
+-- function List.popFront( list )
+-- 	local first = list.first
+-- 	if first > list.last then error("List id empty!") end
+-- 	local value = list[first]
+-- 	list[first] = nil
+-- 	list.first = first + 1
+-- 	return value
+-- end
 
-function List.popBack( list )
-	local last = list.last
-	if last < list.first then
-		error("table is empty!")
-	end
-	local value = list[last]
-	list[last] = nil
-	list.last = list.last - 1
-	return value
-end
+-- function List.popBack( list )
+-- 	local last = list.last
+-- 	if last < list.first then
+-- 		error("table is empty!")
+-- 	end
+-- 	local value = list[last]
+-- 	list[last] = nil
+-- 	list.last = list.last - 1
+-- 	return value
+-- end
 
 -- local list = List.new()
 -- List.pushFront(list,1)
@@ -314,40 +314,40 @@ end
 -- 	print(k,v)
 -- end
 
--- 钩子函数
-local Counters = {}
-local Names = {}
-local function hook( ... )
-	local f = debug.getinfo(2,"f").func
-	if Counters[f] == nil then
-		Counters[f] = 1
-		Names[f] = debug.getinfo(2,"Sn")
-	else
-		Counters[f] = Counters[f] + 1
-	end
-end
+-- -- 钩子函数
+-- local Counters = {}
+-- local Names = {}
+-- local function hook( ... )
+-- 	local f = debug.getinfo(2,"f").func
+-- 	if Counters[f] == nil then
+-- 		Counters[f] = 1
+-- 		Names[f] = debug.getinfo(2,"Sn")
+-- 	else
+-- 		Counters[f] = Counters[f] + 1
+-- 	end
+-- end
 
-function getname( func )
-	local n = Names[func]
-	if n.what == "C" then
-		return n.name
-	end
-	local lc = string.format("[%s]:%s",n.short_src,n.linedefined)
-	if n.namewhat ~= "" then
-		return string.format("%s (%s)",lc,n.name)
-	else
-		return lc 
-	end
-end
+-- function getname( func )
+-- 	local n = Names[func]
+-- 	if n.what == "C" then
+-- 		return n.name
+-- 	end
+-- 	local lc = string.format("[%s]:%s",n.short_src,n.linedefined)
+-- 	if n.namewhat ~= "" then
+-- 		return string.format("%s (%s)",lc,n.name)
+-- 	else
+-- 		return lc 
+-- 	end
+-- end
 
-local f = assert(loadfile(arg[1]))
-debug.sethook(hook,"c")
-f()
-debug.sethook()
+-- local f = assert(loadfile(arg[1]))
+-- debug.sethook(hook,"c")
+-- f()
+-- debug.sethook()
 
-for func ,count in pairs(Counters) do
-	print(getname(func),count)
-end
+-- for func ,count in pairs(Counters) do
+-- 	print(getname(func),count)
+-- end
 
 -- local sin = math.sin
 -- function foo (x)
@@ -358,3 +358,38 @@ end
 -- end
 
 -- print(foo(10))
+
+--[[😂 Face With Tears of Joy
+😍 Smiling Face With Heart-Eyes
+🤔 Thinking Face
+😊 Smiling Face With Smiling Eyes
+🔥 Fire
+🎃 Jack-O-Lantern
+🙄 Face With Rolling Eyes--]]
+-- t1 = {1,2}
+-- t2 = {3,4}
+-- mt = {}
+
+-- mt.__add = function ( t1,t2 )
+-- 	for _,item in ipairs(t2) do
+-- 		table.insert(t1,item)
+-- 	end
+-- 	return t1
+-- end
+
+-- setmetatable(t1,mt)
+-- mt.__index = function ( t,key )
+-- 	return 100
+-- end
+
+-- mt.__newindex = function ( t,key,value )
+-- 	if key == "lzl" then
+-- 		rawset(t,"lzl","this is a handsome boy")
+-- 	end
+-- end
+-- t1["lzl"] = 55
+-- print(t1["lzl"])
+-- tsum = t1 + t2
+-- for k,v in ipairs(tsum) do
+-- 	print(k,v)
+-- end

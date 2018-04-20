@@ -1,12 +1,9 @@
-#include <iostream>
-#include <string>
-using namespace std;
-int main(){
-	string a="hello world";
-    string b=a;
-    if (a.c_str()==b.c_str())
-    {
-        cout<<"true"<<endl;
-    }
-	return 0;
+int socket(int domain , int type,int protocol)
+int bind(int sockfd,struct socketaddr *myaddr,socket_t addrlen);
+int listen(int sockfd,int backlog)
+
+int main(int argc,char ** argv)
+{
+	glutInit(&argc,argv);
+	glutInitDislplayMode()
 }

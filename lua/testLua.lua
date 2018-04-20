@@ -2,6 +2,7 @@
 --   line = io.read()
 -- until line ~= ""
 -- print(line)
+require "testing"
 
 function add( ... )
   local a,b = ...
@@ -262,18 +263,84 @@ end
 -- a:write("123123123")
 -- a:close()
 
-local time = os.clock()
-for i = 1,100 do
-  -- while true do
-  --   if i % 2 == 1 then break end
-  --   print("===========",i)
-  --   break
-  -- end  
-  if i % 2 == 1 then
-  else
-    print("------",i)
-  end
-end
-print(os.clock() - time)
+-- local random = math.random
+-- function bt_getuuid()
+--     local template ='xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'
+--     return string.gsub(template, '[xy]', function (c)
+--         local v = (c == 'x') and random(0, 0xf) or random(8, 0xb)
+--         return string.format('%x', v)
+--     end)
+-- end
+-- -- print(bt_getuuid())
 
-print("testLua testLua testLua testLua")
+-- function sleep(n)
+--    if n > 0 then os.execute("ping -w " .. tonumber(n + 1) .. " localhost > NUL") end
+-- end
+
+-- print("begin",os.time())
+-- sleep(10)
+-- -- print("ned",os.time())
+
+-- function Sleeping( n )
+--   local t = os.clock()
+--   local tmp = os.clock() - t
+--   while( tmp < n) do
+--     tmp =  os.clock() - t
+--   end
+-- end
+
+-- Sleeping(10)
+
+
+-- print("end",os.time())
+
+--closure
+-- function list_iter( t )
+--   local i = 0
+--   local n = #t
+--   return function ( ... )
+--     i = i + 1
+--     if i <= n then return t[i] end
+--   end
+-- end
+-- t = {1,2,3}
+-- for ele in list_iter(t) do
+--   print(ele)
+-- end
+
+-- iter = list_iter(t)
+-- while true do
+--   local ele = iter()
+--   if ele == nil then break end
+--   print(ele)
+
+
+-- local t={}
+-- for line in io.lines() do
+--    if(line=="") then break end
+--    t[#t+1]=line
+-- end
+
+-- local s=table.concat(t,"\n")  --将table t 中的字符串连接起来
+-- print(s)
+
+
+-- local t = {}
+-- setmetatable(t,{__mode = "k"})
+-- key1 = {name = "key1"}
+-- t[key1] = 1
+-- key1 = nil;
+
+-- key2 = {name = "key2"}
+-- t[key2] = 1
+-- key2 = nil;
+
+-- collectgarbage();
+-- for key ,value in pairs(t) do
+--   print(key.name .. ":" .. value)
+-- end
+
+for i = 1,3 do
+  print(i)
+  i = 3
+end

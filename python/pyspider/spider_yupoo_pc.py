@@ -16,7 +16,7 @@ PAGE_URL_LIST =  []
 IMG_URL_LIST = []
 imgNum =  0
 for x in range(1,15):
-	PAGE_URL_LIST.append(BASE_PAGE_URL + str(x))
+	PAGE_URL_LIST.append(BASE_PAGE_URL % str(x))
 #&tab=max
 class Producer(threading.Thread):
 	def run(self):
