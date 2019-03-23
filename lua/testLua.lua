@@ -339,8 +339,4 @@ end
 -- for key ,value in pairs(t) do
 --   print(key.name .. ":" .. value)
 -- end
-
-for i = 1,3 do
-  print(i)
-  i = 3
-end
+print ( "字符串是什么回事啊啊啊")

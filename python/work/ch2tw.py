@@ -51,7 +51,7 @@ def replace_ch(target_path):
 		fd = open(target_path, 'w')
 		fd.write(result)
 		fd.flush()
-		fd.close
+		fd.close()
 
 
 def get_files(path, ext):

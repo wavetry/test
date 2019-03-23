@@ -12,7 +12,7 @@ try:
     s.connect((host, port))
 except Exception, e:
     msg = traceback.format_exc()
-    print '连接错误:', msg
+    print 'connect failed:', msg
  
 input_command = raw_input('Input command:')
 s.send(input_command)
@@ -20,8 +20,8 @@ s.send(input_command)
 # 利用shutdown()函数使socket双向数据传输变为单向数据传输
 # 该参数表示了如何关闭socket。具体为：0表示禁止将来读；1表示禁止将来写；2表示禁止将来读和写
 s.shutdown(1)
-print '发送完成.'
-print '收到内容：\n'
+print 'send finish'
+print 'recv:\n'
 while 1:
     buff = s.recv(4096)
     if not len(buff):

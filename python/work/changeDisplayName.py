@@ -38,6 +38,13 @@ def changeDisplayName(path,ext):
 	with open('ccbInfo.txt','a+') as f :
 		f.write("\n".join(ext_strings))
 
+def func(m):
+	displayName = m.group(2)
+	if re.search(r'@@',displayName) == None:
+		displayName = m.group(2) + "@@" + m.group(5)
+	retult = "<key>displayName</key>%s<string>%s</string>%s<key>memberVarAssignmentName</key>%s<string>%s</string>" % (m.group(1),displayName,m.group(3),m.group(4),m.group(5))
+	return retult
+	
 if __name__ == '__main__': 
 	path = sys.path[0]
 	ext = 'ccb'

@@ -3,8 +3,8 @@
 block_cipher = None
 
 
-a = Analysis(['tool.py', '/Users/wavetry/SVN/resources/CCB/copyRes2Game.sh'],
-             pathex=['/Users/wavetry/Develop/test/python/work'],
+a = Analysis(['tool.py'],
+             pathex=['E:\\gitproject\\test\\python\\work'],
              binaries=[],
              datas=[],
              hiddenimports=[],
