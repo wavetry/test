@@ -59,7 +59,7 @@ def gen_png_from_plist(plist_filename, png_filename):
         if not os.path.isdir(file_path):
             os.mkdir(file_path)
         outfile = (file_path+'/' + k).replace('gift_', '')
-        print outfile, "generated"
+        print (outfile, "generated")
         result_image.save(outfile)
 
 if __name__ == '__main__':
@@ -69,4 +69,4 @@ if __name__ == '__main__':
     if (os.path.exists(plist_filename) and os.path.exists(png_filename)):
         gen_png_from_plist( plist_filename, png_filename )
     else:
-        print "make sure you have boith plist and png files in the same directory"
+        print ("make sure you have boith plist and png files in the same directory")
